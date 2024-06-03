@@ -40,19 +40,29 @@ def get_names(text,separator):
 
     text = normalize_text(text);
     date = text.split(separator)
+    w=1;
+    for i in date :
+        print(w) 
+        print(i)
+        w+=1
+        
     entities = []
     for i in date:
         if i != "":
             name = extract_names(i)
-            if ' ' in name:
-                args = name.split(' ')
-                if len(args) == 2:
-                    name = args[0]
-                    last_name= args [1];
+            print(name);
+            if name is not None:   
+                if ' ' in name:
+                    args = name.split(' ')
+                    if len(args) == 2:
+                        name = args[0]
+                        last_name= args [1];
+                    else:
+                        last_name = find_last_name(i, name)
                 else:
-                     last_name = find_last_name(i, name)
+                    last_name = find_last_name(i, name)
             else:
-               last_name = find_last_name(i, name)
+                last_name = None
             ids = get_code(i)
             entities.append( {"name":name, "lastName":last_name,"id":ids, "text":i})
     return entities
