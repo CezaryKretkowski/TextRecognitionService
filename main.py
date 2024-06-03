@@ -62,8 +62,11 @@ def get_names(text,separator):
                 else:
                     last_name = find_last_name(i, name)
             else:
-                last_name = None
+                last_name = None    
             ids = get_code(i)
+            if ids is not None:
+                index =i.index(ids) +len(ids)
+                i = i[index:]
             entities.append( {"name":name, "lastName":last_name,"id":ids, "text":i})
     return entities
 
